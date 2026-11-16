@@ -1,9 +1,10 @@
 import { identity, projects } from "@/lib/content";
+import HeroStage from "./HeroStage";
 
 export default function Hero() {
   return (
     <section id="topo" className="relative overflow-hidden">
-      <div className="mx-auto grid max-w-[1280px] gap-14 px-5 pb-24 pt-40 md:px-10 md:pb-32 md:pt-52">
+      <div className="mx-auto grid max-w-[1280px] gap-14 px-5 pb-16 pt-40 md:px-10 md:pb-24 md:pt-52">
         <p className="defog font-mono text-[11px] uppercase tracking-[0.18em] text-gold">
           UX/UI · Estratégia de produto · Engenharia
         </p>
@@ -35,6 +36,11 @@ export default function Hero() {
             </a>
           </div>
         </div>
+      </div>
+
+      {/* Montra: ecrãs reais dos projetos */}
+      <div className="pb-20 md:pb-28">
+        <HeroStage />
       </div>
 
       {/* Régua inferior: factos curtos e verificáveis */}

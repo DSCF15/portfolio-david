@@ -18,7 +18,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contacto" className="relative overflow-hidden border-t border-line">
+    <section id="contacto" data-chapter="Contacto" className="relative overflow-hidden border-t border-line">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-0 bottom-0 h-[70%]"

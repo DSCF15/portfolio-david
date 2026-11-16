@@ -3,7 +3,7 @@ import SectionHead from "./SectionHead";
 
 export default function Method() {
   return (
-    <section id="metodo" className="border-t border-line">
+    <section id="metodo" data-chapter="Método" className="border-t border-line">
       <div className="mx-auto max-w-[1280px] px-5 py-28 md:px-10 md:py-40">
         <SectionHead id="metodo" label="Método" title="Primeiro a estratégia." accent="Depois o ecrã." />
 

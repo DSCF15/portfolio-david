@@ -5,10 +5,12 @@ import Lenis from "lenis";
 
 /**
  * Camada invisível que dá vida à página:
- * - a luz dourada que segue o cursor (ou o scroll, em ecrãs tácteis);
- * - a aresta dos painéis .glass que acende onde a luz toca;
- * - o scroll suave (Lenis) e as revelações ao fazer scroll.
- * Com "reduzir movimento" ativo, só as revelações ficam (e aparecem logo).
+ * - luz dourada que segue o cursor e acende as arestas dos painéis .glass;
+ * - barra de progresso de leitura (--scroll no <html>);
+ * - paralaxe: cada [data-parallax] recebe --p entre -1 (abaixo do ecrã) e 1 (acima);
+ * - secção atual: envia o evento "section-change" com o id da <section data-chapter>;
+ * - scroll suave (Lenis) e revelações ao entrar no ecrã.
+ * Com "reduzir movimento", ficam só as revelações (e aparecem logo).
  */
 export default function Ambient() {
   useEffect(() => {
@@ -34,7 +36,56 @@ export default function Ambient() {
       els.forEach((el) => io.observe(el));
     }
 
-    if (reduce) return () => io?.disconnect();
+    // Secção atual (funciona também com movimento reduzido)
+    const chapters = [...document.querySelectorAll("[data-chapter]")];
+    let current = "";
+    const spy = () => {
+      const mid = window.innerHeight * 0.4;
+      let found = "";
+      for (const c of chapters) {
+        const r = c.getBoundingClientRect();
+        if (r.top <= mid && r.bottom > mid) found = c.dataset.chapter;
+      }
+      if (found !== current) {
+        current = found;
+        window.dispatchEvent(new CustomEvent("section-change", { detail: found }));
+      }
+    };
+
+    // Progresso + paralaxe
+    // [data-parallax] move-se com --p; [data-progress] só recebe --p para o CSS usar à sua maneira
+    const parallax = [...document.querySelectorAll("[data-parallax], [data-progress]")];
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        ticking = false;
+        const max = root.scrollHeight - window.innerHeight;
+        root.style.setProperty("--scroll", max > 0 ? (window.scrollY / max).toFixed(4) : "0");
+        spy();
+        if (reduce) return;
+        const vh = window.innerHeight;
+        for (const el of parallax) {
+          const r = el.getBoundingClientRect();
+          if (r.bottom < -200 || r.top > vh + 200) continue;
+          const center = r.top + r.height / 2;
+          const p = Math.max(-1, Math.min(1, (vh / 2 - center) / (vh / 2 + r.height / 2)));
+          el.style.setProperty("--p", p.toFixed(4));
+        }
+      });
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    onScroll();
+
+    if (reduce) {
+      return () => {
+        io?.disconnect();
+        window.removeEventListener("scroll", onScroll);
+        window.removeEventListener("resize", onScroll);
+      };
+    }
 
     // Luz + arestas de vidro
     let frame = 0;
@@ -59,6 +110,7 @@ export default function Ambient() {
 
     // Scroll suave + âncoras
     const lenis = new Lenis({ lerp: 0.1 });
+    lenis.on("scroll", onScroll);
     let raf = requestAnimationFrame(function loop(t) {
       lenis.raf(t);
       raf = requestAnimationFrame(loop);
@@ -77,6 +129,8 @@ export default function Ambient() {
 
     return () => {
       io?.disconnect();
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
       window.removeEventListener("pointermove", onMove);
       document.removeEventListener("click", onAnchor);
       cancelAnimationFrame(frame);
@@ -86,5 +140,10 @@ export default function Ambient() {
     };
   }, []);
 
-  return <div className="light-field" aria-hidden="true" />;
+  return (
+    <>
+      <div className="light-field" aria-hidden="true" />
+      <div className="scroll-progress" aria-hidden="true" />
+    </>
+  );
 }

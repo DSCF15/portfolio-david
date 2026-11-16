@@ -16,6 +16,14 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   const toggleRef = useRef(null);
   const firstLinkRef = useRef(null);
+  const [chapter, setChapter] = useState("");
+
+  // Nome da secção que está no ecrã (enviado pelo Ambient)
+  useEffect(() => {
+    const onChange = (e) => setChapter(e.detail || "");
+    window.addEventListener("section-change", onChange);
+    return () => window.removeEventListener("section-change", onChange);
+  }, []);
 
   useEffect(() => {
     const lenis = window.__lenis;
@@ -41,9 +49,19 @@ export default function Header() {
     <>
       <header className="fixed inset-x-0 top-0 z-50 mix-blend-difference text-ivory">
         <div className="mx-auto flex max-w-[1280px] items-center justify-between gap-6 px-5 py-5 md:px-10">
-          <a href="#topo" className="font-display text-xl italic tracking-tight" onClick={() => setOpen(false)}>
-            David França
-          </a>
+          <div className="flex min-w-0 items-baseline gap-4">
+            <a href="#topo" className="shrink-0 font-display text-xl italic tracking-tight" onClick={() => setOpen(false)}>
+              David França
+            </a>
+            <span
+              aria-live="polite"
+              className={`hidden truncate font-mono text-[11px] uppercase tracking-[0.16em] text-smoke transition-all duration-500 md:inline ${
+                chapter && !open ? "translate-y-0 opacity-100" : "translate-y-1 opacity-0"
+              }`}
+            >
+              / {chapter}
+            </span>
+          </div>
           <div className="flex items-center gap-6 font-mono text-[11px] uppercase tracking-[0.16em]">
             <span className="hidden text-smoke sm:inline">
               Caniço · <LocalTime />

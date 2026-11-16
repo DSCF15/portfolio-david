@@ -9,7 +9,7 @@ export default function Crafts() {
   const [open, setOpen] = useState(0);
 
   return (
-    <section id="antes" className="relative border-t border-line bg-basalt/60">
+    <section id="antes" data-chapter="Antes do código" className="relative border-t border-line bg-basalt/60">
       <div className="mx-auto max-w-[1280px] px-5 py-28 md:px-10 md:py-40">
         <SectionHead id="antes" label="Antes do código" title="Antes de desenhar interfaces," accent="estive do outro lado delas.">
           <p>

@@ -73,34 +73,36 @@ body::before {
   transition: background 0.2s linear;
 }
 
-/* ── Vidro: painel com aresta que acende onde a luz toca ────── */
-.glass {
-  position: relative;
-  background: rgb(239 233 223 / 0.025);
-  border: 1px solid rgb(233 213 166 / 0.12);
-  box-shadow: inset 0 1px 0 rgb(239 233 223 / 0.06);
-  backdrop-filter: blur(14px) saturate(120%);
-  -webkit-backdrop-filter: blur(14px) saturate(120%);
+@layer components {
+  /* ── Vidro: painel com aresta que acende onde a luz toca ────── */
+  .glass {
+    position: relative;
+    background: rgb(239 233 223 / 0.025);
+    border: 1px solid rgb(233 213 166 / 0.12);
+    box-shadow: inset 0 1px 0 rgb(239 233 223 / 0.06);
+    backdrop-filter: blur(14px) saturate(120%);
+    -webkit-backdrop-filter: blur(14px) saturate(120%);
+  }
+  .glass::after {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    pointer-events: none;
+    border: 1px solid transparent;
+    background: radial-gradient(
+        220px circle at var(--px, 50%) var(--py, -40%),
+        rgb(233 213 166 / 0.85),
+        transparent 70%
+      )
+      border-box;
+    -webkit-mask: linear-gradient(#000 0 0) padding-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.5s var(--ease-glass);
+  }
+  .glass:hover::after { opacity: 1; }
 }
-.glass::after {
-  content: "";
-  position: absolute;
-  inset: -1px;
-  pointer-events: none;
-  border: 1px solid transparent;
-  background: radial-gradient(
-      220px circle at var(--px, 50%) var(--py, -40%),
-      rgb(233 213 166 / 0.85),
-      transparent 70%
-    )
-    border-box;
-  -webkit-mask: linear-gradient(#000 0 0) padding-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  opacity: 0;
-  transition: opacity 0.5s var(--ease-glass);
-}
-.glass:hover::after { opacity: 1; }
 
 /* ── Abertura: o vidro desembacia ───────────────────────────── */
 @keyframes defog {
@@ -164,7 +166,61 @@ html.js .reveal.is-in { opacity: 1; transform: none; }
 }
 .lane-note { animation: lane-fall 3.2s linear infinite; }
 
+/* ── Barra de progresso de leitura ──────────────────────────── */
+.scroll-progress {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 1px;
+  z-index: 60;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, var(--color-gold) 30%, var(--color-champagne));
+  transform-origin: 0 50%;
+  transform: scaleX(var(--scroll, 0));
+}
+
+/* ── Paralaxe: --p vai de -1 a 1 conforme a posição no ecrã ─── */
+[data-parallax] {
+  transform: translate3d(0, calc(var(--p, 0) * var(--depth, 40px) * -1), 0);
+  will-change: transform;
+}
+
+/* ── Faixa de imagens que corre com o scroll ────────────────── */
+.reel-track {
+  transform: translate3d(calc((var(--p, 0) * -18%) - 9%), 0, 0);
+  will-change: transform;
+}
+.reel-track-rev {
+  transform: translate3d(calc((var(--p, 0) * 18%) - 22%), 0, 0);
+  will-change: transform;
+}
+
+/* ── Imagens de projeto: zoom lento ao passar o rato ────────── */
+.media-zoom img { transition: transform 1.2s var(--ease-glass); }
+.media-zoom:hover img { transform: scale(1.025); }
+
+/* ── Montra do topo: cross-fade entre capturas ──────────────── */
+@keyframes showcase-in {
+  from { opacity: 0; transform: scale(1.04); }
+  to   { opacity: 1; transform: scale(1); }
+}
+.showcase-slide { animation: showcase-in 1.4s var(--ease-glass) both; }
+
+/* ── Cursor contextual ("Ver", "Abrir") ─────────────────────── */
+.cursor-tag {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 70;
+  pointer-events: none;
+  transform: translate3d(var(--cx, -100px), var(--cy, -100px), 0) translate(-50%, -50%) scale(var(--cs, 0));
+  transition: transform 0.35s var(--ease-glass);
+}
+@media (hover: none), (pointer: coarse) {
+  .cursor-tag { display: none; }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  [data-parallax], .reel-track, .reel-track-rev { transform: none !important; }
   *, *::before, *::after {
     animation: none !important;
     transition: none !important;
