@@ -4,6 +4,7 @@ import HeroStage from "./HeroStage";
 export default function Hero() {
   return (
     <section id="topo" className="relative overflow-hidden">
+      <div className="aurora" aria-hidden="true" />
       <div className="mx-auto grid max-w-[1280px] gap-14 px-5 pb-16 pt-40 md:px-10 md:pb-24 md:pt-52">
         <p className="defog font-mono text-[11px] uppercase tracking-[0.18em] text-gold">
           UX/UI · Estratégia de produto · Engenharia
@@ -11,7 +12,7 @@ export default function Hero() {
 
         <h1 className="relative font-display text-[clamp(3.1rem,10.5vw,10rem)] font-normal leading-[0.9] tracking-[-0.025em]">
           <span className="defog block">{identity.headline[0]}</span>
-          <span className="defog-2 block italic text-champagne">{identity.headline[1]}</span>
+          <span className="defog-2 block italic text-sunset">{identity.headline[1]}</span>
           <span className="light-sweep" aria-hidden="true" />
         </h1>
 

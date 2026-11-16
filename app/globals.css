@@ -2,19 +2,24 @@
 
 /* ─────────────────────────────────────────────────────────────
    "Do outro lado do vidro"
-   Basalto da Madeira, vidro e uma única fonte de luz dourada.
-   Regra: o ouro nunca ocupa mais de ~5% do ecrã.
+   Basalto quente da Madeira, açafrão e coral, com secções claras
+   (creme e açafrão) a dar ritmo à página.
+   Os nomes são papéis, não cores fixas: "obsidian" é sempre o fundo
+   e "ivory" o texto. As classes .theme-* trocam-nos por secção.
    ───────────────────────────────────────────────────────────── */
-@theme inline {
-  --color-obsidian: #0c0b0a;   /* fundo */
-  --color-basalt: #16140f;     /* superfícies */
-  --color-basalt-2: #1d1a14;   /* superfície elevada */
-  --color-smoke: #a39a8b;      /* texto secundário */
-  --color-ivory: #efe9df;      /* texto principal */
-  --color-gold: #c9a45c;       /* acento: arestas, marcadores */
-  --color-champagne: #e9d5a6;  /* reflexo: CTA, ênfase */
-  --color-line: rgb(201 164 92 / 0.16);
+@theme {
+  --color-obsidian: #17130f;   /* fundo */
+  --color-basalt: #221c16;     /* superfícies */
+  --color-basalt-2: #2b241c;   /* superfície elevada */
+  --color-smoke: #c2b6a3;      /* texto secundário */
+  --color-ivory: #faf4ea;      /* texto principal */
+  --color-gold: #f5b342;       /* acento: açafrão */
+  --color-champagne: #ffd88a;  /* ênfase, botão principal */
+  --color-coral: #ff7a4d;      /* segundo acento, usado com parcimónia */
+  --color-line: rgb(245 179 66 / 0.22);
+}
 
+@theme inline {
   --font-display: var(--font-bodoni), "Didot", "Bodoni 72", Georgia, serif;
   --font-sans: var(--font-geist), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", Consolas, monospace;
@@ -59,6 +64,32 @@ body::before {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
+/* ── Secções claras: trocam os papéis das cores ─────────────── */
+.theme-cream {
+  --color-obsidian: #f6eedf;
+  --color-basalt: #ece0c9;
+  --color-basalt-2: #e4d5ba;
+  --color-smoke: #5e5446;
+  --color-ivory: #1d1812;
+  --color-gold: #a3560f;
+  --color-champagne: #b8421a;
+  --color-line: rgb(29 24 18 / 0.14);
+  background: var(--color-obsidian);
+  color: var(--color-ivory);
+}
+.theme-saffron {
+  --color-obsidian: #f5b342;
+  --color-basalt: #eba536;
+  --color-basalt-2: #e29a2c;
+  --color-smoke: #4a3519;
+  --color-ivory: #1d1812;
+  --color-gold: #7a260c;
+  --color-champagne: #6b1f08;
+  --color-line: rgb(29 24 18 / 0.2);
+  background: var(--color-obsidian);
+  color: var(--color-ivory);
+}
+
 /* ── Luz que segue o cursor ─────────────────────────────────── */
 .light-field {
   position: fixed;
@@ -66,20 +97,38 @@ body::before {
   z-index: 0;
   pointer-events: none;
   background: radial-gradient(
-    560px circle at var(--mx, 72%) var(--my, 18%),
-    rgb(201 164 92 / 0.085),
+    620px circle at var(--mx, 72%) var(--my, 18%),
+    rgb(245 179 66 / 0.14),
     transparent 62%
   );
   transition: background 0.2s linear;
+}
+
+/* ── Aurora do topo: açafrão e coral a respirar devagar ─────── */
+@keyframes aurora-drift {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50%      { transform: translate3d(-4%, 3%, 0) scale(1.08); }
+}
+.aurora {
+  position: absolute;
+  inset: -20% -10% auto -10%;
+  height: 120%;
+  pointer-events: none;
+  background:
+    radial-gradient(38% 42% at 78% 22%, rgb(245 179 66 / 0.42), transparent 70%),
+    radial-gradient(30% 36% at 92% 58%, rgb(255 122 77 / 0.32), transparent 70%),
+    radial-gradient(34% 40% at 12% 8%, rgb(255 216 138 / 0.14), transparent 70%);
+  filter: blur(20px);
+  animation: aurora-drift 18s ease-in-out infinite;
 }
 
 @layer components {
   /* ── Vidro: painel com aresta que acende onde a luz toca ────── */
   .glass {
     position: relative;
-    background: rgb(239 233 223 / 0.025);
-    border: 1px solid rgb(233 213 166 / 0.12);
-    box-shadow: inset 0 1px 0 rgb(239 233 223 / 0.06);
+    background: rgb(250 244 234 / 0.025);
+    border: 1px solid rgb(255 216 138 / 0.12);
+    box-shadow: inset 0 1px 0 rgb(250 244 234 / 0.06);
     backdrop-filter: blur(14px) saturate(120%);
     -webkit-backdrop-filter: blur(14px) saturate(120%);
   }
@@ -91,7 +140,7 @@ body::before {
     border: 1px solid transparent;
     background: radial-gradient(
         220px circle at var(--px, 50%) var(--py, -40%),
-        rgb(233 213 166 / 0.85),
+        rgb(255 216 138 / 0.85),
         transparent 70%
       )
       border-box;
@@ -123,7 +172,7 @@ body::before {
   inset: -10% auto -10% 0;
   width: 30%;
   pointer-events: none;
-  background: linear-gradient(90deg, transparent, rgb(233 213 166 / 0.16), transparent);
+  background: linear-gradient(90deg, transparent, rgb(255 216 138 / 0.16), transparent);
   opacity: 0;
   animation: sweep 1.6s 0.25s var(--ease-glass) both;
 }
@@ -154,8 +203,8 @@ html.js .reveal.is-in { opacity: 1; transform: none; }
 
 /* ── Pulso do indicador "disponível" ────────────────────────── */
 @keyframes pulse-dot {
-  0%, 100% { box-shadow: 0 0 0 0 rgb(201 164 92 / 0.5); }
-  50%      { box-shadow: 0 0 0 6px rgb(201 164 92 / 0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgb(245 179 66 / 0.5); }
+  50%      { box-shadow: 0 0 0 6px rgb(245 179 66 / 0); }
 }
 .pulse-dot { animation: pulse-dot 2.4s ease-in-out infinite; }
 
@@ -227,4 +276,12 @@ html.js .reveal.is-in { opacity: 1; transform: none; }
   }
   html.js .reveal { opacity: 1; transform: none; }
   .light-field, .light-sweep { display: none; }
+}
+
+/* ── Texto em gradiente açafrão → coral (só em títulos grandes) ── */
+.text-sunset {
+  background: linear-gradient(95deg, var(--color-champagne) 0%, var(--color-gold) 45%, var(--color-coral) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }

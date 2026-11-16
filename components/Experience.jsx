@@ -3,7 +3,7 @@ import SectionHead from "./SectionHead";
 
 export default function Experience() {
   return (
-    <section id="percurso" data-chapter="Percurso" className="border-t border-line">
+    <section id="percurso" data-chapter="Percurso" className="theme-cream border-t border-line">
       <div className="mx-auto max-w-[1280px] px-5 py-28 md:px-10 md:py-40">
         <SectionHead id="percurso" label="Percurso" title="Trabalho real," accent="com utilizadores reais." />
 

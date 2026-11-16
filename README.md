@@ -54,12 +54,15 @@ formação, ofícios, método e contactos. Não é preciso mexer nos componentes
 
 | Token | Cor | Uso |
 | --- | --- | --- |
-| Obsidiana | `#0C0B0A` | Fundo |
-| Basalto | `#16140F` | Superfícies |
-| Fumo | `#A39A8B` | Texto secundário |
-| Marfim | `#EFE9DF` | Texto principal |
-| Ouro velho | `#C9A45C` | Arestas e marcadores |
-| Champanhe | `#E9D5A6` | Ênfase e botão principal |
+| Obsidiana | `#17130F` | Fundo (castanho-escuro quente) |
+| Basalto | `#221C16` | Superfícies |
+| Fumo | `#C2B6A3` | Texto secundário |
+| Marfim | `#FAF4EA` | Texto principal |
+| Açafrão | `#F5B342` | Acento principal |
+| Champanhe | `#FFD88A` | Ênfase e botão principal |
+| Coral | `#FF7A4D` | Segundo acento (aurora do topo, gradientes) |
+
+As secções Percurso e Método usam o tema creme (`.theme-cream`) e “Antes do código” o tema açafrão (`.theme-saffron`). Cada tema redefine os mesmos tokens, por isso os componentes não mudam.
 
 Tipografia: **Bodoni Moda** (títulos), **Geist** (texto) e **Geist Mono** (dados e rótulos).
 Os tokens estão em [`app/globals.css`](app/globals.css).

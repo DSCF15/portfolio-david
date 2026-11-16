@@ -22,13 +22,13 @@ export default function Contact() {
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-0 bottom-0 h-[70%]"
-        style={{ background: "radial-gradient(60% 70% at 50% 100%, rgb(201 164 92 / 0.14), transparent 70%)" }}
+        style={{ background: "radial-gradient(60% 70% at 50% 100%, rgb(245 179 66 / 0.14), transparent 70%)" }}
       />
       <div className="relative mx-auto max-w-[1280px] px-5 pb-12 pt-28 md:px-10 md:pt-40">
         <p className="reveal font-mono text-[11px] uppercase tracking-[0.16em] text-smoke">Contacto</p>
 
         <h2 className="reveal mt-8 max-w-[16ch] font-display text-[clamp(2.75rem,8vw,7.5rem)] font-normal leading-[0.95] tracking-[-0.025em]">
-          Tens um produto que as pessoas <em className="text-champagne">ainda não percebem?</em>
+          Tens um produto que as pessoas <em className="text-sunset">ainda não percebem?</em>
         </h2>
 
         <div className="reveal mt-14 flex flex-wrap items-center gap-x-6 gap-y-4">

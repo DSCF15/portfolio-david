@@ -140,7 +140,7 @@ export default function Plate({ kind, label }) {
         className="absolute inset-0 opacity-60"
         style={{
           background:
-            "radial-gradient(70% 60% at 80% 0%, rgb(201 164 92 / 0.16), transparent 70%), radial-gradient(60% 50% at 0% 100%, rgb(239 233 223 / 0.04), transparent 70%)",
+            "radial-gradient(70% 60% at 80% 0%, rgb(245 179 66 / 0.16), transparent 70%), radial-gradient(60% 50% at 0% 100%, rgb(250 244 234 / 0.04), transparent 70%)",
         }}
       />
       {Art && <Art />}
