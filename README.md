@@ -12,10 +12,12 @@ Foco em UX/UI, estratégia de produto e desenvolvimento web.
 | Secção | O que mostra |
 | --- | --- |
 | **Hero** | A tese numa frase e uma montra que roda os ecrãs reais dos projetos e se endireita com o scroll |
+| **Sobre mim** | Retrato com paralaxe, apresentação curta e factos rápidos |
 | **Projetos** | Cinco casos de estudo com capturas reais (desktop e telemóvel), galeria e caso completo (Contexto → Tensão → Decisão → Resultado) |
 | **Arquivo de ecrãs** | Duas faixas de capturas que deslizam com o scroll; cada uma abre em grande |
 | **Percurso** | Estágio na ANTURIO Business Software e formação na Universidade da Madeira |
 | **Antes do código** | O percurso fora da área e a lição que cada trabalho deixou. É a única secção sobre este tema |
+| **Em campo** | Fotografias de futebol numa galeria horizontal que avança com o scroll |
 | **Método** | Ouvir, Mapear, Desenhar, Construir |
 | **Contacto** | Email com botão de copiar, LinkedIn, GitHub e hora local na Madeira |
 
@@ -77,6 +79,7 @@ Os tokens estão em [`app/globals.css`](app/globals.css).
 - Casos de estudo e ofícios que se abrem sem saltos no layout.
 - Índice em ecrã inteiro (fecha com `Esc`).
 - Scroll suave com Lenis.
+- Música ambiente gerada no browser (Web Audio, sem ficheiros): desligada por defeito, com convite discreto e botão “Som” no cabeçalho. O tom muda conforme a secção.
 
 Com “reduzir movimento” ativo no sistema, as animações, a luz e o scroll suave ficam desligados.
 
@@ -87,6 +90,7 @@ app/            layout, página e estilos globais (tokens)
 components/     Header, Hero, HeroStage, Work, Frames, Plate, Reel, Lightbox, CursorTag,
                 Experience, Crafts, Method, Contact, Ambient
 public/work/    capturas dos projetos (WebP)
+public/me/      fotografias pessoais: perfil, obra e futebol (WebP)
 lib/content.js  todo o conteúdo editável
 ```
 

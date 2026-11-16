@@ -3,11 +3,14 @@
 import { useEffect, useRef, useState } from "react";
 import { identity, contact } from "@/lib/content";
 import LocalTime from "./LocalTime";
+import { SoundToggle } from "./Sound";
 
 const sections = [
+  { href: "#sobre", label: "Sobre mim" },
   { href: "#projetos", label: "Projetos" },
   { href: "#percurso", label: "Percurso" },
   { href: "#antes", label: "Antes do código" },
+  { href: "#campo", label: "Em campo" },
   { href: "#metodo", label: "Método" },
   { href: "#contacto", label: "Contacto" },
 ];
@@ -63,9 +66,10 @@ export default function Header() {
             </span>
           </div>
           <div className="flex items-center gap-6 font-mono text-[11px] uppercase tracking-[0.16em]">
-            <span className="hidden text-smoke sm:inline">
+            <span className="hidden text-smoke lg:inline">
               Caniço · <LocalTime />
             </span>
+            <SoundToggle />
             <button
               ref={toggleRef}
               type="button"

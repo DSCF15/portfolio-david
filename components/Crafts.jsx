@@ -42,6 +42,18 @@ export default function Crafts() {
                 </button>
                 <div id={id} className="fold" data-open={isOpen} inert={!isOpen}>
                   <div>
+                    {c.photo && (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src={c.photo.src}
+                        alt={c.photo.alt}
+                        width={450}
+                        height={800}
+                        loading="lazy"
+                        decoding="async"
+                        className="mb-6 ml-2.5 aspect-[4/5] w-[min(260px,70%)] -rotate-2 border-[6px] border-[#faf4ea] object-cover object-top shadow-[0_24px_50px_-20px_rgb(29_24_18/0.6)]"
+                      />
+                    )}
                     <p className="max-w-[40rem] pb-7 pl-2.5 text-smoke">
                       {c.lesson}
                       {c.href && (
@@ -54,6 +66,14 @@ export default function Crafts() {
                             className="link-line whitespace-nowrap text-champagne"
                           >
                             Ficha no zerozero ↗
+                          </a>
+                        </>
+                      )}
+                      {c.more && (
+                        <>
+                          {" · "}
+                          <a href={c.more.href} className="link-line whitespace-nowrap text-champagne">
+                            {c.more.label} ↓
                           </a>
                         </>
                       )}
