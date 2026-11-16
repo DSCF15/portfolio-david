@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# dscf15 — AI Command Center
 
-## Getting Started
+Portefólio pessoal do David França, construído como uma consola de comando:
+arranque em terminal, rede neuronal 3D no topo e "salas" para cada parte do CV.
 
-First, run the development server:
+## Começar
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # gera o site estático em /out
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Editar o conteúdo
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Tudo o que aparece no site está em **`lib/content.js`**: bio, skills, percurso,
+projetos, certificações e contactos. Não precisas de mexer nos componentes.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Certificações:** a sala só aparece quando a lista tiver pelo menos uma entrada.
+- **Email:** fica escondido enquanto `contact.email` estiver vazio.
+- **Projetos:** `status` aceita `"online"`, `"em curso"` ou `"proposta"`.
 
-## Learn More
+## Interações
 
-To learn more about Next.js, take a look at the following resources:
+| Atalho | O que faz |
+| --- | --- |
+| `Ctrl/⌘ + K` | Abre a pesquisa da consola |
+| `1` a `6` | Salta para a sala correspondente |
+| Qualquer tecla no arranque | Salta a animação inicial |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Na sala Contacto há um terminal funcional (`ajuda`, `quem`, `projetos`, `stack`,
+`github`, `linkedin`, `email`, `limpar`).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+O arranque só aparece uma vez por sessão. Com "reduzir movimento" ativo no
+sistema, não há arranque, scroll suave nem rede animada.
 
-## Deploy on Vercel
+## Estrutura
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+app/            layout, página e estilos (tokens de cor e tipografia em globals.css)
+components/     Console (página), Deck (navegação), NeuralField (3D),
+                BootSequence, CommandPalette, Terminal, Rooms (salas)
+lib/content.js  todo o conteúdo editável
+lib/rooms.js    ordem e atalhos das salas
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Deploy
+
+O projeto usa `output: "export"`, por isso é um site estático:
+
+- **Vercel:** importa o repositório do GitHub, sem configuração extra.
+- **Netlify / Cloudflare Pages:** comando `npm run build`, pasta `out`.
+
+## Stack
+
+Next.js 15 (App Router) · Tailwind CSS 4 · React Three Fiber + Drei · Framer Motion · Lenis
+Tipos: Chakra Petch, IBM Plex Sans e IBM Plex Mono (servidos localmente via Fontsource).
