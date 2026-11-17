@@ -11,7 +11,7 @@ Foco em UX/UI, estratégia de produto e desenvolvimento web.
 
 | Secção | O que mostra |
 | --- | --- |
-| **Hero** | A tese numa frase e uma montra que roda os ecrãs reais dos projetos e se endireita com o scroll |
+| **Capa** | Fotografia em ecrã inteiro (jogo noturno com nevoeiro) que desembacia ao abrir, com a frase “Vejo a jogada antes de ela acontecer.” e a montra dos ecrãs dos projetos por baixo |
 | **Sobre mim** | Retrato com paralaxe, apresentação curta e factos rápidos |
 | **Projetos** | Cinco casos de estudo com capturas reais (desktop e telemóvel), galeria e caso completo (Contexto → Tensão → Decisão → Resultado) |
 | **Arquivo de ecrãs** | Duas faixas de capturas que deslizam com o scroll; cada uma abre em grande |

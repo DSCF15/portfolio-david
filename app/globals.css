@@ -279,6 +279,30 @@ html.js .reveal.is-in { opacity: 1; transform: none; }
 @keyframes spin { to { transform: rotate(360deg); } }
 .spin-slow { animation: spin 22s linear infinite; }
 
+/* ── Cabeçalho: cápsulas de vidro escuro, legíveis sobre qualquer secção ── */
+.header-pill {
+  background: rgb(23 19 15 / 0.55);
+  border: 1px solid rgb(250 244 234 / 0.1);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border-radius: 999px;
+}
+
+/* ── Capa: a fotografia desembacia e aproxima-se devagar ───── */
+@keyframes cover-in {
+  0%   { filter: blur(18px) brightness(0.55); transform: scale(1.14); }
+  55%  { filter: blur(0) brightness(1); }
+  100% { filter: blur(0) brightness(1); transform: scale(1.03); }
+}
+.cover-in { animation: cover-in 2.6s var(--ease-glass) both; }
+
+/* ── Indicação de scroll ───────────────────────────────────── */
+@keyframes scroll-cue {
+  0%   { transform: translateY(-100%); }
+  100% { transform: translateY(200%); }
+}
+.scroll-cue { animation: scroll-cue 1.8s var(--ease-glass) infinite; }
+
 @media (prefers-reduced-motion: reduce) {
   [data-parallax], .reel-track, .reel-track-rev { transform: none !important; }
   *, *::before, *::after {

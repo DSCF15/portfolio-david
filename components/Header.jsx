@@ -50,23 +50,23 @@ export default function Header() {
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-50 mix-blend-difference text-ivory">
-        <div className="mx-auto flex max-w-[1280px] items-center justify-between gap-6 px-5 py-5 md:px-10">
-          <div className="flex min-w-0 items-baseline gap-4">
+      <header className="fixed inset-x-0 top-0 z-50 text-[#faf4ea]">
+        <div className="mx-auto flex max-w-[1280px] items-center justify-between gap-4 px-3 py-3 md:px-8 md:py-4">
+          <div className="header-pill flex min-w-0 items-baseline gap-4 px-4 py-2">
             <a href="#topo" className="shrink-0 font-display text-xl italic tracking-tight" onClick={() => setOpen(false)}>
               David França
             </a>
             <span
               aria-live="polite"
-              className={`hidden truncate font-mono text-[11px] uppercase tracking-[0.16em] text-smoke transition-all duration-500 md:inline ${
+              className={`hidden truncate font-mono text-[11px] uppercase tracking-[0.16em] text-[#faf4ea]/70 transition-all duration-500 md:inline ${
                 chapter && !open ? "translate-y-0 opacity-100" : "translate-y-1 opacity-0"
               }`}
             >
               / {chapter}
             </span>
           </div>
-          <div className="flex items-center gap-6 font-mono text-[11px] uppercase tracking-[0.16em]">
-            <span className="hidden text-smoke lg:inline">
+          <div className="header-pill flex items-center gap-5 px-4 py-2.5 font-mono text-[11px] uppercase tracking-[0.16em] md:gap-6">
+            <span className="hidden text-[#faf4ea]/70 lg:inline">
               Caniço · <LocalTime />
             </span>
             <SoundToggle />
