@@ -5,6 +5,7 @@ import { projects, githubProfile } from "@/lib/content";
 import SectionHead from "./SectionHead";
 import Plate from "./Plate";
 import { BrowserFrame, PhoneFrame } from "./Frames";
+import VideoFrame from "./VideoFrame";
 import { useLightbox } from "./Lightbox";
 
 const storyParts = [
@@ -31,6 +32,14 @@ function Stage({ p, flip }) {
     return (
       <div className="mx-auto w-full max-w-[880px]">
         <Plate kind={p.plate} label={`Ilustração do projeto ${p.title}`} />
+      </div>
+    );
+  }
+
+  if (p.media.video) {
+    return (
+      <div className={flip ? "md:pl-[8%]" : "md:pr-[8%]"}>
+        <VideoFrame video={p.media.video} label={p.frameLabel} title={p.title} />
       </div>
     );
   }
