@@ -79,7 +79,8 @@ Os tokens estão em [`app/globals.css`](app/globals.css).
 - Casos de estudo e ofícios que se abrem sem saltos no layout.
 - Índice em ecrã inteiro (fecha com `Esc`).
 - Scroll suave com Lenis.
-- Música ambiente gerada no browser (Web Audio, sem ficheiros): desligada por defeito, com convite discreto e botão “Som” no cabeçalho. O tom muda conforme a secção.
+- Playlist com 4 faixas, escolhidas num painel no botão “Som”: Basalto e Nevoeiro (ambiente) e Caniço 122 (house), geradas no browser com Web Audio, e “No Child Left Behind” (Kanye West) no leitor oficial do Spotify. O som das faixas geradas muda conforme a secção.
+- Botão “Descarregar CV” na capa e no contacto (`public/cv/David-Franca-CV.pdf`).
 
 Com “reduzir movimento” ativo no sistema, as animações, a luz e o scroll suave ficam desligados.
 

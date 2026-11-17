@@ -53,6 +53,16 @@ export default function Hero() {
                 </span>
               )}
               <a
+                href={identity.cv.href}
+                download={identity.cv.file}
+                className="group inline-flex items-center gap-3 border border-ivory/40 px-6 py-3.5 text-sm tracking-wide text-ivory backdrop-blur-sm transition-colors duration-300 hover:border-champagne hover:text-champagne"
+              >
+                {identity.cv.label}
+                <span className="font-mono text-[10px] text-ivory/60 group-hover:text-champagne" aria-hidden="true">
+                  PDF
+                </span>
+              </a>
+              <a
                 href="#projetos"
                 className="group inline-flex items-center gap-3 bg-champagne px-6 py-3.5 text-sm tracking-wide text-[#17130f] transition-colors duration-300 hover:bg-ivory"
               >

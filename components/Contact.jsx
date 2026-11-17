@@ -50,7 +50,16 @@ export default function Contact() {
           </span>
         </div>
 
-        <p className="reveal mt-6 text-smoke">Respondo em menos de 24 horas.</p>
+        <div className="reveal mt-6 flex flex-wrap items-center gap-x-8 gap-y-3">
+          <p className="text-smoke">Respondo em menos de 24 horas.</p>
+          <a
+            href={identity.cv.href}
+            download={identity.cv.file}
+            className="link-line font-mono text-[11px] uppercase tracking-[0.16em] text-champagne"
+          >
+            {identity.cv.label} · PDF ↓
+          </a>
+        </div>
 
         <footer className="mt-32 grid gap-6 border-t border-line pt-8 font-mono text-[11px] uppercase tracking-[0.16em] text-smoke md:grid-cols-3 md:items-center">
           <span>
